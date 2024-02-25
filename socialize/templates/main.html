@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/cb792c0850.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>AMIGO</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <style>
+        /* Custom styles for the sidebar */
+        .sidebar {
+            background-color:#eddcd9;
+            height: 100vh;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .sidebar-hidden {
+            display: none;
+        }
+
+
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        a {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+   <!-- this a modal code -->
+   <div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="text-center mt-3">
+                <img src="{{profile.profilepic.url}}" alt="Profile Picture" class="profile-pic">
+                <h4 class="mt-2"><a href="/profile/{{user}}" style="text-decoration:none;">{{user}}</a></h4>
+            </div>
+            <ul class="nav flex-column mt-4">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/" style="color:rgb(255, 40, 76) ;">
+                        <i class="fas fa-home mr-1" style="color: rgb(255, 40, 76);"></i> Hub
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:rgb(255, 40, 76)" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                        <i class="fas fa-search mr-1" style="color: rgb(255, 40, 76);"></i> Find
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" style="color:rgb(255, 40, 76)"  data-bs-target="#exampleModal"
+                        data-bs-whatever="@getbootstrap">
+                        <i class="fas fa-plus-square mr-1" style="color: rgb(255, 40, 76);"></i>  Post
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:rgb(255, 40, 76)"  href="/profile/{{user}}">
+                        <i class="fas fa-user mr-1" style="color: rgb(255, 40, 76);"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:rgb(255, 40, 76)" href="/logouut">
+                        <i class="fas fa-sign-out-alt mr-1" style="color: rgb(255, 40, 76);"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+</div>
+
+
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            {% include "modal.html" %}
+            {% include "search.html" %}
+        <!-- home posts code -->
+        <div class="container d-flex justify-content-start">
+        <div>{% for pos in post %}
+            <div class="container" id="{{pos.id}}">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="post-card" style="border: 1px solid black; margin: 50px; background-color: #eddcd9;">
+                            <img src="{{pos.image.url}}" alt="Post Image" class="post-image" style="height: 100%; width: 100%; margin: 0;">
+                            <div class="post-content" style="margin-left: 10px;">
+                                <h5><a href="/profile/{{pos.user}}" style="text-decoration: none;">{{pos.user}}</a></h5>
+                                <p>{{pos.caption}}</p>
+                                <p class="text-muted">{{pos.posted_at}}</p>
+                                
+                                <div class="d-flex justify-content-between" style="margin-bottom: 8px; margin-right:1px;">
+                                    <a href="/likes/{{pos.id}}" class="btn btn-outline-primary" style="color: rgb(255, 40, 76); background-color: #eddcd9;"><i class="fas fa-thumbs-up"></i></a>
+
+                                    {% if pos.likes_count == 0 %}
+                                    <p>0</p>
+                                    {% elif pos.likes_count == 1 %}
+                                    <p>{{pos.likes_count}} 👍</p>
+                                    {% else %}
+                                    <p>{{pos.likes_count}} 👍</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+        </main>
+
+
+    </div>
+</div>
+
+
+   
+    <!--<script src="{% static 'js/app.js'%}"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

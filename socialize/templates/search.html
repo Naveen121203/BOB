@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #eddcd9;">
+            <div class="modal-header d-flex align-content-center justify-content-center">
+                <div class="w-100">
+                    <form method="get" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <div class="input-group rounded" style="background-color: #eddcd9;">
+                            <input type="text" name="q" placeholder="Search users and posts" class="form-control rounded"
+                                aria-label="Search" aria-describedby="search-addon" style="background-color: #eddcd9; color: rgb(255, 40, 76);">
+                            <span class="input-group-text border-0" id="search-addon" style="background-color: #eddcd9;">
+                                <i class="fas fa-search" style="color: rgb(255, 40, 76);" type="submit"></i>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
