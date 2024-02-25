@@ -1,0 +1,47 @@
+-->use it in  views.py 
+
+from django.http import JsonResponse
+from .models import U_Profile, Post
+
+def list_users(request):
+    users = U_Profile.objects.all()
+    data = [{'username': user.user.username, 'about': user.about, 'profilepic': user.profilepic.url} for user in users]
+    return JsonResponse(data, safe=False)
+
+def search_user(request, name):
+    try:
+        user_profile = U_Profile.objects.get(user__username=name)
+        data = {'username': user_profile.user.username, 'about': user_profile.about, 'profilepic': user_profile.profilepic.url}
+        return JsonResponse(data)
+    except U_Profile.DoesNotExist:
+        return JsonResponse({'error': 'User not found'}, status=404)
+
+def list_posts(request):
+    posts = Post.objects.all()
+    data = [{'image': post.image.url, 'caption': post.caption, 'posted_at': post.posted_at, 'likes_count': post.likes_count} for post in posts]
+    return JsonResponse(data, safe=False)
+
+def user_posts(request, name):
+    try:
+        user_posts = Post.objects.filter(user=name)
+        data = [{'image': post.image.url, 'caption': post.caption, 'posted_at': post.posted_at, 'likes_count': post.likes_count} for post in user_posts]
+        return JsonResponse(data, safe=False)
+    except Post.DoesNotExist:
+        return JsonResponse({'error': 'User has no posts'}, status=404)
+
+
+
+-->use it in urls.py
+
+
+from django.urls import path
+from .views import list_users, search_user, list_posts, user_posts
+
+urlpatterns = [
+    path('users/', list_users, name='list_users'),
+    path('users/<str:name>/', search_user, name='search_user'),
+    path('posts/', list_posts, name='list_posts'),
+    path('users/<str:name>/posts/', user_posts, name='user_posts'),
+]
+
+
