@@ -41,6 +41,8 @@ primary_key- user_id
 Tried to deploy in vercel but it didn't worked
 https://bobdeployment.vercel.app/
 
+# for backend api to view the users refer END POINT.txt
+
 # video_1
 https://github.com/Naveen121203/BOB/assets/109895559/85cf1e50-1d87-47cc-8c04-cd16bdb29d77
 
