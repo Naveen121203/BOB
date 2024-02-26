@@ -42,6 +42,9 @@ Tried to deploy in vercel but it didn't worked
 https://bobdeployment.vercel.app/
 
 # for backend api to view the users refer END POINT.txt
+![image](https://github.com/Naveen121203/BOB/assets/109895559/dd7a360c-c6a7-4029-a98c-917ae3d07ebd)
+![image](https://github.com/Naveen121203/BOB/assets/109895559/5c0d7403-9e1f-4bce-b99c-8e958ef4b674)
+
 
 # video_1
 https://github.com/Naveen121203/BOB/assets/109895559/85cf1e50-1d87-47cc-8c04-cd16bdb29d77
